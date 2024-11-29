@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
+using TodoApi.DTOs;
 using TodoApi.Models;
 
 namespace TodoApi.Controllers
@@ -9,10 +12,20 @@ namespace TodoApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _configuration;
 
-        public UserController(UserContext context)
+        //public UserController(UserContext context)
+        //{
+        //    _context = context;
+        //}
+
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
-            _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _configuration = configuration;
         }
 
         // GET: api/Users
@@ -83,6 +96,48 @@ namespace TodoApi.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetSpecificUser), new { id = user.Id }, user);
+        }
+
+        //api/user/register
+        [HttpPost("register")]
+        public async Task<ActionResult<string>> Register(RegisterDto registerDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = new User
+            {
+                Email = registerDto.Email,
+                Name = registerDto.Name,
+                UserName = registerDto.Email
+            };
+
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            //if (registerDto.Roles != null)
+            //{
+            //    await _userManager.AddToRoleAsync(user, "User");
+            //}
+            //else
+            //{
+            //    foreach (var role in registerDto.Roles)
+            //    {
+            //        await _userManager.AddToRoleAsync(user, role);
+            //    }
+            //}
+
+            return Ok(new AuthResponseDto
+            {
+                IsSuccess = true,
+                Message = $"Account Created Successfully!"
+            });
         }
 
         // DELETE: api/TodoItems/5
