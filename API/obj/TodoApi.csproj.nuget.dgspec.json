@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project Work\\Web Apps\\TodoApi\\TodoApi.csproj": {}
+    "D:\\Project Work\\App Repos\\todoapi\\API\\TodoApi.csproj": {}
   },
   "projects": {
-    "D:\\Project Work\\Web Apps\\TodoApi\\TodoApi.csproj": {
+    "D:\\Project Work\\App Repos\\todoapi\\API\\TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project Work\\Web Apps\\TodoApi\\TodoApi.csproj",
+        "projectUniqueName": "D:\\Project Work\\App Repos\\todoapi\\API\\TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "D:\\Project Work\\Web Apps\\TodoApi\\TodoApi.csproj",
+        "projectPath": "D:\\Project Work\\App Repos\\todoapi\\API\\TodoApi.csproj",
         "packagesPath": "C:\\Users\\Jarro\\.nuget\\packages\\",
-        "outputPath": "D:\\Project Work\\Web Apps\\TodoApi\\obj\\",
+        "outputPath": "D:\\Project Work\\App Repos\\todoapi\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
