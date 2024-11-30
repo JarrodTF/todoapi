@@ -36,6 +36,22 @@ namespace TodoApi.Controllers
             return todoItem;
         }
 
+        // GET: api/TodoItems/user/{userId}
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItemsByUserId(long userId)
+        {
+            var todoItems = await _context.TodoItems
+                                          .Where(item => item.User_Id == userId)
+                                          .ToListAsync();
+
+            if (todoItems == null || !todoItems.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(todoItems);
+        }
+
         // PUT: api/TodoItems/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)

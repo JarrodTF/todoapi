@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\Project Work\\App Repos\\todoapi\\API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CB8D3361-66BA-48AB-9835-D3050DE9B8E6}|TodoApi.csproj|d:\\project work\\app repos\\todoapi\\api\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CB8D3361-66BA-48AB-9835-D3050DE9B8E6}|TodoApi.csproj|solutionrelative:dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CB8D3361-66BA-48AB-9835-D3050DE9B8E6}|TodoApi.csproj|d:\\project work\\app repos\\todoapi\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CB8D3361-66BA-48AB-9835-D3050DE9B8E6}|TodoApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,19 +19,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RegisterDto.cs",
-              "DocumentMoniker": "D:\\Project Work\\App Repos\\todoapi\\API\\DTOs\\RegisterDto.cs",
-              "RelativeDocumentMoniker": "DTOs\\RegisterDto.cs",
-              "ToolTip": "D:\\Project Work\\App Repos\\todoapi\\API\\DTOs\\RegisterDto.cs",
-              "RelativeToolTip": "DTOs\\RegisterDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-30T21:44:23.811Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Project Work\\App Repos\\todoapi\\API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
