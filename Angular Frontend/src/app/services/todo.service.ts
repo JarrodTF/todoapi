@@ -9,28 +9,18 @@ import { environment } from '../../environments/environment.development';
 })
 export class TodoService {
     apiUrl:string = environment.apiUrl;
-    // private tokenKey = 'token';
 
   constructor(private http: HttpClient) {}
 
-  // getUserTodoList(userId: string): Observable<TodoItem[]> {
-  //   const token = localStorage.getItem(this.tokenKey);
+  // addToDo(newTodo: string): Observable<TodoItem> {
+  //   const userId = this.getUserIdFromToken();
+  //   const newTodoItem: TodoItem = {
+  //     todo: newTodo,
+  //     isComplete: false,
+  //     userId: userId,
+  //   };
 
-  //   if (!token) {
-  //     throw new Error('Authentication token not found.');
-  //   }
-
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${token}`,
-  //   });
-
-  //   return this.http.get<TodoItem[]>(`${this.apiUrl}user/${userId}`, { headers });
-  // }
-
-  // getUserTodoList(): Observable<TodoItem[]> {
-  //   // return this.http.get<TodoItem[]>(`${this.apiUrl}todoitems`);
-  //   //need to use the id of the user
-  //   return this.http.get<TodoItem[]>(`${this.apiUrl}ToDoItems/user/500000004`);
+  //   return this.http.post<TodoItem>(`${this.apiUrl}ToDoItems/`, newTodoItem);
   // }
 
   getUserTodoList(): Observable<TodoItem[]> {
