@@ -12,16 +12,18 @@ export class TodoService {
 
   constructor(private http: HttpClient) {}
 
-  // addToDo(newTodo: string): Observable<TodoItem> {
-  //   const userId = this.getUserIdFromToken();
-  //   const newTodoItem: TodoItem = {
-  //     todo: newTodo,
-  //     isComplete: false,
-  //     userId: userId,
-  //   };
+  addToDo(newTodo: string): Observable<TodoItem> {
+    const userId = this.getUserIdFromToken();
+    const newTodoItem: TodoItem = {
+      todo: newTodo,
+      isComplete: false,
+      user_Id: userId,
+      id: 0
+    };
 
-  //   return this.http.post<TodoItem>(`${this.apiUrl}ToDoItems/`, newTodoItem);
-  // }
+    console.log("Sending new todo item:", newTodoItem);
+    return this.http.post<TodoItem>(`${this.apiUrl}ToDoItems/`, newTodoItem);
+  }
 
   getUserTodoList(): Observable<TodoItem[]> {
     const userId = this.getUserIdFromToken(); // Dynamically fetch user ID
@@ -38,5 +40,9 @@ export class TodoService {
     const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
     // alert(payload.nameid);
     return payload.userId; // Adjust based on your token structure
+  }
+
+  updateTodoItem(updatedItem: TodoItem): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}ToDoItems/${updatedItem.id}`, updatedItem);
   }
 }

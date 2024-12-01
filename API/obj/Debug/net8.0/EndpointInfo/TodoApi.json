@@ -190,6 +190,55 @@
         }
       }
     },
+    "/api/ToDoItems/user/{userId}": {
+      "get": {
+        "tags": [
+          "TodoItems"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TodoItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TodoItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TodoItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/User": {
       "get": {
         "tags": [
@@ -465,6 +514,10 @@
           "message": {
             "type": "string",
             "nullable": true
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -490,8 +543,7 @@
       "RegisterDto": {
         "required": [
           "email",
-          "name",
-          "userName"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -505,8 +557,8 @@
             "type": "string"
           },
           "userName": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "password": {
             "type": "string",
@@ -605,6 +657,10 @@
           "name": {
             "minLength": 1,
             "type": "string"
+          },
+          "prim_id": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
