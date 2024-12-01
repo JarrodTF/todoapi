@@ -39,12 +39,17 @@
                             <span [class.completed]="item.isComplete" class="flex-grow">
                                 {{ item.todo }}
                             </span>
+
+                            <!-- Delete Icon -->
+                            <button mat-icon-button color="warn" (click)="deleteTodo(item)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
                         </li>
                     </ul>
                 </div>
 
                 <div *ngIf="!isLoading && todoList.length === 0">
-                    You don't have anything on your To-Do list. Add something below:
+                    <h2 style="padding-bottom: 20px;">You don't have anything on your To-Do list. Add something below:</h2>
 
                     <div id="myDIV" class="header">
                         <input type="text" id="myInput" placeholder="Title..." class="text-black"

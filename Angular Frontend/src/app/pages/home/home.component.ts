@@ -44,7 +44,7 @@ export class HomeComponent {
       },
       (error) => {
         console.error('Error fetching todo list:', error);
-        this.errorMessage = 'Failed to load todo items.';
+        this.errorMessage = 'No todo items were found';
         this.isLoading = false;
       }
     );
@@ -65,6 +65,19 @@ export class HomeComponent {
       (error) => {
         this.errorMessage = 'Error adding to-do item.', error;
         this.isLoading = false;
+      }
+    );
+  }
+
+  deleteTodo(item: TodoItem): void {
+    this.todoService.deleteTodoItem(item.id).subscribe(
+      () => {
+        this.todoList = this.todoList.filter((todo) => todo.id !== item.id);
+        console.log(`Todo item deleted: ${item.todo}`);
+      },
+      (error) => {
+        console.error('Error deleting todo item:', error);
+        this.errorMessage = 'Failed to delete the item. Please try again.';
       }
     );
   }

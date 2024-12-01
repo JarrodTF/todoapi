@@ -86,8 +86,6 @@ namespace TodoApi.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
         {
-            Console.WriteLine($"Received todoItem: UserId = {todoItem.User_Id}, Todo = {todoItem.User_Id}");
-
             _context.TodoItems.Add(todoItem);
             await _context.SaveChangesAsync();
 

@@ -25,6 +25,10 @@ export class TodoService {
     return this.http.post<TodoItem>(`${this.apiUrl}ToDoItems/`, newTodoItem);
   }
 
+  deleteTodoItem(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}ToDoItems/${id}`);
+  }
+
   getUserTodoList(): Observable<TodoItem[]> {
     const userId = this.getUserIdFromToken(); // Dynamically fetch user ID
     return this.http.get<TodoItem[]>(`${this.apiUrl}ToDoItems/user/${userId}`);
