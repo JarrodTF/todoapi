@@ -1,15 +1,15 @@
 <div>
     <mat-toolbar color="primary" style="padding:10px 50px">
-        <button mat-icon-button>
+        <!-- <button mat-icon-button>
             <mat-icon>menu</mat-icon>
-        </button>
-        <a routerLink="/">My App</a>
+        </button> -->
+        <a routerLink="/">Home</a>
         <div class="w-full"></div>
 
         <div *ngIf="isLoggedIn() && authService.getUserDetail() as userDetail; else notLoggedIn">
             <div class="flex gap-5 items-center">
                 <a [matMenuTriggerFor]="menu" class="flex gap-2 cursor-pointer items-center" style="font-size: 18px; padding: 10px 20px; height: 50px;">
-                    <div class="bg-red-400 text-white font-bold shadow-md rounded-full w-5 h-5 p-5 flex justify-center items-center">
+                    <div class="bg-red-400 text-white font-bold shadow-md rounded-full w-4 h-4 p-4 flex justify-center items-center">
                         {{ userDetail?.fullName[0]?.toUpperCase() }}
                     </div>
                     <div class="text-white flex flex-col">

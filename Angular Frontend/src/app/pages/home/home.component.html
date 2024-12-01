@@ -1,15 +1,15 @@
 <div class="flex items-center flex-col pt-56 h-screen">
     <div class="h-screen">
-        <h1 class="text-4xl text-center font-bold my-10">
+        <h1 class="text-4xl text-center font-bold my-10" style="color: black;">
             Welcome to
-            <span class="text-5xl text-green-800">Todo List App</span>
+            <span class="text-5xl text-green-800" style="color: black;">Todo List App</span>
         </h1>
 
         <div class="flex flex-col items-center gap-5 justify-center">
             <div *ngIf="authService.getUserDetail()">
-                <h1 class="text-2xl">
+                <h1 class="font-bold text-2xl text-black justify-center text-center">
                     You are logged in as
-                    <span class="font-bold bg-blue-600 text-white rounded-md p-2">
+                    <span class="text-black">
                         {{ authService.getUserDetail()?.fullName }}
                     </span>.
                 </h1>
@@ -18,31 +18,24 @@
                 <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
                 <div *ngIf="!isLoading && todoList.length > 0">
-                    <h2 style="padding-bottom: 20px;">Your To-Do List:</h2>
+                    <h2 style="padding-top: 50px; padding-bottom: 10px;" class="font-bold">Your To-Do List:</h2>
 
                     <div id="myDIV" class="header">
-                        <input type="text" id="myInput" placeholder="Title..." class="text-black"
-                            [(ngModel)]="newTodo" />
-                        <span class="addBtn" (click)="addTodo()">Add</span>
+                        <input type="text" id="myInput" placeholder="Title..." class="text-black" [(ngModel)]="newTodo" style="background-color:white;"/>
+                        <span class="addBtn" (click)="addTodo()" style="background-color: rgb(47, 255, 141);">Add</span>
                     </div>
 
                     <ul id="myUL" class="w-full">
                         <li *ngFor="let item of todoList" class="flex items-center gap-3 py-2">
-                            <!-- Checkbox -->
-                            <mat-checkbox
-                                [(ngModel)]="item.isComplete"
-                                (change)="toggleComplete(item)"
-                                color="primary">
+                            <mat-checkbox [(ngModel)]="item.isComplete" (change)="toggleComplete(item)" style="background-color: transparent;">
                             </mat-checkbox>
 
-                            <!-- Task Text -->
-                            <span [class.completed]="item.isComplete" class="flex-grow">
+                            <span [class.completed]="item.isComplete" class="flex-grow" style="background-color: transparent;">
                                 {{ item.todo }}
                             </span>
 
-                            <!-- Delete Icon -->
                             <button mat-icon-button color="warn" (click)="deleteTodo(item)">
-                                <mat-icon>delete</mat-icon>
+                                <mat-icon style="color:white; background-color: red;" class="shadow-md rounded-full justify-center items-center">delete</mat-icon>
                             </button>
                         </li>
                     </ul>
