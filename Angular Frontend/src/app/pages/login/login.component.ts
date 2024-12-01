@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
           duration:5000,
           horizontalPosition:'center'
         })
-
+        
         this.router.navigate(['/'])
       },
 

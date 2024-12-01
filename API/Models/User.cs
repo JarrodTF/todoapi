@@ -14,6 +14,8 @@ namespace TodoApi.Models
         [Required]
         public string? Name {  get; set; }
 
+        public int Prim_id { get; set; }
+
     //    [Required]
     //    public string? Password { get; set; }
     }

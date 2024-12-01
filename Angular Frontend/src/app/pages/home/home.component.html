@@ -11,6 +11,44 @@
                         {{ authService.getUserDetail()?.fullName }}
                     </span>.
                 </h1>
+
+                <div *ngIf="isLoading">Loading...</div>
+                <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+                <div *ngIf="!isLoading && todoList.length > 0">
+                    <h2>Your To-Do List</h2>
+
+                    <div id="myDIV" class="header">
+                        <input type="text" id="myInput" placeholder="Title..." class="text-black">
+                        <span onclick="newElement()" class="addBtn">Add</span>
+                    </div>
+
+                    <ul id="myUL">
+
+                        <ul>
+                            <li *ngFor="let item of todoList">
+                                
+                                <div *ngIf="item.isComplete">
+                                    <span [class.completed]="item.isComplete"></span>
+                                    <li class="checked"><span>{{ item.todo }}</span></li>
+                                </div>
+
+                                <div *ngIf="!item.isComplete">
+                                    <span [class.completed]="item.isComplete"></span>
+                                    <li class="unchecked"><span>{{ item.todo }}</span></li>
+                                </div>
+                                
+                        </ul>
+                    </ul>
+
+                    <!-- <ul>
+                        <li *ngFor="let item of todoList">
+                            <span>{{ item.todo }}</span>
+                            <span [class.completed]="item.isComplete">(Completed: {{ item.isComplete }})</span>
+                        </li>
+                    </ul> -->
+                </div>
+                <div *ngIf="!isLoading && todoList.length === 0">No items found.</div>
+
             </div>
 
             <div *ngIf="authService.getUserDetail() == null">
@@ -24,3 +62,61 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Create a "close" button and append it to each list item
+    var myNodelist = document.getElementsByTagName("LI");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+    }
+
+    // Click on a close button to hide the current list item
+    var close = document.getElementsByClassName("close");
+    var i;
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+
+    // Add a "checked" symbol when clicking on a list item
+    var list = document.querySelector('ul');
+    list.addEventListener('click', function (ev) {
+        if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+        }
+    }, false);
+
+    // Create a new list item when clicking on the "Add" button
+    function newElement() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("myInput").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+            alert("You must write something!");
+        } else {
+            document.getElementById("myUL").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+    }
+</script>

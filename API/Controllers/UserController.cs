@@ -165,6 +165,7 @@ namespace TodoApi.Controllers
 
             return Ok(new AuthResponseDto
             {
+                UserId = user.Prim_id,
                 Token = token,
                 IsSuccess = true,
                 Message = "Logged In."

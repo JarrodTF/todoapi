@@ -11,72 +11,99 @@ import { RegisterRequest } from '../interfaces/register-request';
   providedIn: 'root'
 })
 export class AuthService {
-  
-  apiUrl:string = environment.apiUrl;
 
-  private tokenKey='token'; 
+  apiUrl: string = environment.apiUrl;
 
-  constructor(private http:HttpClient) { }
+  private tokenKey = 'token';
 
-  login(data:LoginRequest):Observable<AuthResponse> {
+  constructor(private http: HttpClient) { }
+
+  login(data: LoginRequest): Observable<AuthResponse> {
     return this.http
-    .post<AuthResponse>(`${this.apiUrl}user/login`, data)
-    .pipe(
-      map((response) => {
-        if(response.isSuccess) {
-          localStorage.setItem(this.tokenKey, response.token);
-        }
+      .post<AuthResponse>(`${this.apiUrl}user/login`, data)
+      .pipe(
+        map((response) => {
+          if (response.isSuccess) {
 
-        return response;
-      })
-    );
+            // alert(response.userId);
+            var convertedId = response.userId.toString();
+
+            var newToken = this.appendTokenKeyWithUserId(response.token, convertedId)
+
+            localStorage.setItem(this.tokenKey, newToken);
+          }
+
+          return response;
+        })
+      );
   }
 
-  register(data:RegisterRequest):Observable<AuthResponse> {
+  register(data: RegisterRequest): Observable<AuthResponse> {
     return this.http
-    .post<AuthResponse>(`${this.apiUrl}user/register`, data);
-    
+      .post<AuthResponse>(`${this.apiUrl}user/register`, data);
+
   }
 
-  getUserDetail=()=>{
+  getUserDetail = () => {
     const token = this.getToken();
-    
-    if(!token) return null;
 
-    const decodedToken:any = jwtDecode(token);
+    if (!token) return null;
+
+    const decodedToken: any = jwtDecode(token);
     const userDetail = {
-      id:decodedToken.id,
-      fullName:decodedToken.name,
-      email:decodedToken.email
+      id: decodedToken.id,
+      fullName: decodedToken.name,
+      email: decodedToken.email
     }
 
     return userDetail;
   }
 
-  logout=():void=>{
+  logout = (): void => {
     localStorage.removeItem(this.tokenKey);
   }
-  
-  isLoggedIn = ():boolean => {
+
+  isLoggedIn = (): boolean => {
     const token = this.getToken();
-    
-    if(!token) return false;
-    
+
+    if (!token) return false;
+
     return !this.isTokenExpired()
   }
-  
+
   private isTokenExpired() {
     const token = this.getToken();
-    
-    if(!token) return true;
-    
-    const decoded =  jwtDecode(token)
+
+    if (!token) return true;
+
+    const decoded = jwtDecode(token)
     const isTokenExpired = Date.now() >= decoded['exp']! * 1000;
-    
-    if(isTokenExpired) this.logout();
-    
+
+    if (isTokenExpired) this.logout();
+
     return isTokenExpired;
   }
 
-  private getToken = ():string | null => localStorage.getItem(this.tokenKey) || "";
+  private getToken = (): string | null => localStorage.getItem(this.tokenKey) || "";
+
+  private appendTokenKeyWithUserId(token: string, userId: string): string {
+    try {
+      const decoded = jwtDecode<any>(token);
+
+      // Append the userId to the decoded payload
+      decoded.userId = userId;
+
+      // Re-encode the payload back into the token
+      const tokenParts = token.split('.');
+      const updatedPayload = btoa(JSON.stringify(decoded)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      
+      return `${tokenParts[0]}.${updatedPayload}.${tokenParts[2]}`;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return token;
+    }
+  }
 }
+
+
+
