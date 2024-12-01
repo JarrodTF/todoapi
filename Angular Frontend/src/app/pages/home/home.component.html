@@ -21,41 +21,55 @@
                     <h2 style="padding-top: 50px; padding-bottom: 10px;" class="font-bold">Your To-Do List:</h2>
 
                     <div id="myDIV" class="header">
-                        <input type="text" id="myInput" placeholder="Title..." class="text-black" [(ngModel)]="newTodo" style="background-color:white;"/>
+                        <input type="text" id="myInput" placeholder="Title..." class="text-black" [(ngModel)]="newTodo"
+                            style="background-color:white;" maxlength="256"/>
                         <span class="addBtn" (click)="addTodo()" style="background-color: rgb(47, 255, 141);">Add</span>
                     </div>
 
                     <ul id="myUL" class="w-full">
                         <li *ngFor="let item of todoList" class="flex items-center gap-3 py-2">
-                            <mat-checkbox [(ngModel)]="item.isComplete" (change)="toggleComplete(item)" style="background-color: transparent;">
+                            <mat-checkbox [(ngModel)]="item.isComplete" (change)="toggleComplete(item)"
+                                style="background-color: transparent;">
                             </mat-checkbox>
 
-                            <span [class.completed]="item.isComplete" class="flex-grow" style="background-color: transparent;">
+                            <span [class.completed]="item.isComplete" class="flex-grow"
+                                style="background-color: transparent;">
                                 {{ item.todo }}
                             </span>
 
+                            <input *ngIf="editingId === item.id" [(ngModel)]="editingText"
+                                class="flex-grow border border-gray-300 rounded-md px-2 py-1"
+                                (keyup.enter)="updateTodo(item)" (blur)="cancelEdit()" maxlength="256"/>
+
+                            <button mat-icon-button color="primary" (click)="startEditing(item)">
+                                <mat-icon style="background-color: rgb(75, 138, 209); color: greenyellow;"
+                                    class="shadow-md rounded-full justify-center items-center">edit</mat-icon>
+                            </button>
+
                             <button mat-icon-button color="warn" (click)="deleteTodo(item)">
-                                <mat-icon style="color:white; background-color: red;" class="shadow-md rounded-full justify-center items-center">delete</mat-icon>
+                                <mat-icon style="color:white; background-color: red;"
+                                    class="shadow-md rounded-full justify-center items-center">delete</mat-icon>
                             </button>
                         </li>
                     </ul>
                 </div>
 
                 <div *ngIf="!isLoading && todoList.length === 0">
-                    <h2 style="padding-bottom: 20px;">You don't have anything on your To-Do list. Add something below:</h2>
+                    <h2 style="padding-bottom: 20px;">You don't have anything on your To-Do list. Add something below:
+                    </h2>
 
                     <div id="myDIV" class="header">
-                        <input type="text" id="myInput" placeholder="Title..." class="text-black"
-                            [(ngModel)]="newTodo" />
-                        <span class="addBtn" (click)="addTodo()">Add</span>
+                        <input type="text" id="myInput" placeholder="Title..." class="text-black" [(ngModel)]="newTodo"
+                            style="background-color:white;" maxlength="256"/>
+                        <span class="addBtn" (click)="addTodo()" style="background-color: rgb(47, 255, 141);">Add</span>
                     </div>
                 </div>
             </div>
 
-            <div *ngIf="authService.getUserDetail() == null">
-                <h1 class="text-2xl">You are not logged in...</h1>
-                <a routerLink="/login">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">
+            <div *ngIf="authService.getUserDetail() == null" class="flex flex-col items-center justify-center gap-4 p-6">
+                <h1 class="text-2xl text-gray-800 font-semibold">You are not logged in...</h1>
+                <a routerLink="/login" class="w-full">
+                    <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-300">
                         Login
                     </button>
                 </a>

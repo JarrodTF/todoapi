@@ -1,24 +1,24 @@
 <div class="h-screen flex items-center justify-center">
     <form class="shadow-md rounded-md p-5 bg-white w-1/6" [formGroup]="form" (ngSubmit)="login()">
-        <div class="py-4">
-            <h1 class="font-bold py-2">Login</h1>
-            <h6 class="text-slate-600 text-base">Login to your account</h6>
+        <div class="py-4 bg-white">
+            <h1 class="font-bold py-2 bg-white">Login</h1>
+            <h6 class="text-slate-600 text-base bg-white">Login to your account</h6>
         </div>
 
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Email</mat-label>
+        <mat-form-field appearance="fill" class="w-full" style="background-color: transparent;">
+            <mat-label class="bg-transparent">Email</mat-label>
             <input matInput placeholder="Email" formControlName="email" />
-            <mat-icon matPrefix>email</mat-icon>
+            <mat-icon matPrefix style="background-color: transparent;">email</mat-icon>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Password</mat-label>
+        <mat-form-field appearance="fill" class="w-full" style="background-color: transparent;">
+            <mat-label class="bg-transparent">Password</mat-label>
             <input matInput
             type="{{hide ? 'password' : 'text'}}"
             formControlName="password"
-            placeholder="Password" />
-            <mat-icon matPrefix>lock</mat-icon>
-            <mat-icon (click)="hide = !hide" matSuffix>
+            placeholder="Password"/>
+            <mat-icon matPrefix style="background-color: transparent;">lock</mat-icon>
+            <mat-icon (click)="hide = !hide" matSuffix style="background-color: transparent;">
                 {{ hide ? 'visibility_off' : 'visibility' }}
             </mat-icon>
         </mat-form-field>
@@ -29,11 +29,11 @@
             Login 
         </button>
 
-        <div class="my-5">
-            <span class="text-slate-600">
+        <div class="my-5 bg-white">
+            <span class="text-slate-600 bg-white">
                 Don't have an account?
             </span>
-            <a class="text-purple-700" [routerLink]="['/register']">Register</a>
+            <a class="text-purple-700 bg-white" [routerLink]="['/register']">Register</a>
         </div>
     </form>
 </div>

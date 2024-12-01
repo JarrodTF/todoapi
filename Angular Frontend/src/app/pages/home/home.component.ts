@@ -29,11 +29,19 @@ export class HomeComponent {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
-  constructor(private todoService: TodoService) {}
+  editingId: number | null = null;
+  editingText: string = '';
+
+  constructor(private todoService: TodoService) { }
 
 
   ngOnInit(): void {
-    this.loadTodos();
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.loadTodos();
+    } else {
+      console.log('No token found in localStorage');
+    }
   }
 
   loadTodos(): void {
@@ -93,7 +101,44 @@ export class HomeComponent {
       }
     );
   }
+
+  startEditing(item: TodoItem): void {
+    this.editingId = item.id;
+    this.editingText = item.todo; // Prepopulate with the current to-do text
+  }
+
+  cancelEdit(): void {
+    this.editingId = null;
+    this.editingText = '';
+  }
+
+  updateTodo(item: TodoItem): void {
+    if (!this.editingText || this.editingText.trim() === '') {
+      alert('Todo text cannot be empty!');
+      this.cancelEdit();
+      return;
+    }
   
+    // Update the item's text locally for preview
+    const updatedItem: TodoItem = { ...item, todo: this.editingText };
+  
+    this.todoService.editTodoItem(updatedItem).subscribe(
+      (updated) => {
+        // Update the local todoList with the new text
+        const index = this.todoList.findIndex((todo) => todo.id === item.id);
+        if (index !== -1) {
+          this.todoList[index] = updated;
+        }
+        // Exit edit mode
+        this.cancelEdit();
+      },
+      (error) => {
+        console.error('Failed to update the todo item:', error);
+        alert('Failed to update the todo item. Please try again.');
+        this.cancelEdit(); // Exit edit mode even on failure
+      }
+    );
+  }
   // ngOnInit(): void {
   //   this.userId = this.getUserId(); // Implement logic to get userId
   //   this.loadTodoList();

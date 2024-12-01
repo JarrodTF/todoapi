@@ -25,6 +25,11 @@ export class TodoService {
     return this.http.post<TodoItem>(`${this.apiUrl}ToDoItems/`, newTodoItem);
   }
 
+  // updateTodoItem(item: TodoItem): Observable<TodoItem> {
+  //   return this.http.put<TodoItem>(`${this.apiUrl}ToDoItems/${item.id}`, item);
+  // }
+  
+
   deleteTodoItem(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}ToDoItems/${id}`);
   }
@@ -44,6 +49,10 @@ export class TodoService {
     const payload = JSON.parse(atob(token.split('.')[1])); // Decode JWT payload
     // alert(payload.nameid);
     return payload.userId; // Adjust based on your token structure
+  }
+
+  editTodoItem(item: TodoItem): Observable<TodoItem> {
+    return this.http.put<TodoItem>(`${this.apiUrl}ToDoItems/${item.id}`, item);
   }
 
   updateTodoItem(updatedItem: TodoItem): Observable<void> {

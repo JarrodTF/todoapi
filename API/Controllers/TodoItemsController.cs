@@ -79,7 +79,8 @@ namespace TodoApi.Controllers
                 }
             }
 
-            return NoContent();
+            //return NoContent();
+            return Ok(todoItem);
         }
 
         // POST: api/TodoItems

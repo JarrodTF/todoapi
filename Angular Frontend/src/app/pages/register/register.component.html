@@ -12,39 +12,39 @@
             <div class="text-xs">{{ error.description }}</div>
         </div>
 
-        <div class="py-4">
-            <h1 class="front-bold text-left py-2">
+        <div class="py-4 bg-white">
+            <h1 class="front-bold text-left py-2 bg-transparent">
                 Register
             </h1>
-            <h6 class="text-slate-600 text-base">
+            <h6 class="text-slate-600 text-base bg-transparent">
                 Create your account
             </h6>
         </div>
-        <mat-form-field appearance="fill" class="w-full ">
-            <mat-label>Email</mat-label>
+        <mat-form-field appearance="fill" class="w-full bg-white">
+            <mat-label class="bg-transparent">Email</mat-label>
             <input matInput placeholder="Email" formControlName="email">
-            <mat-icon matPrefix>email</mat-icon>
+            <mat-icon matPrefix class="bg-transparent">email</mat-icon>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full ">
-            <mat-label>Name</mat-label>
+        <mat-form-field appearance="fill" class="w-full bg-white">
+            <mat-label class="bg-transparent">Name</mat-label>
             <input matInput placeholder="Name" formControlName="name">
-            <mat-icon matPrefix>person</mat-icon>
+            <mat-icon matPrefix class="bg-transparent">person</mat-icon>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full ">
-            <mat-label>Password</mat-label>
+        <mat-form-field appearance="fill" class="w-full bg-white">
+            <mat-label class="bg-transparent">Password</mat-label>
             <input matInput formControlName="password" type="{{passwordHide ? 'password' : 'text'}}" placeholder="Password">
-            <mat-icon matPrefix>lock</mat-icon>
-            <mat-icon (click)="passwordHide = !passwordHide" matSuffix>{{passwordHide ?
+            <mat-icon matPrefix class="bg-transparent">lock</mat-icon>
+            <mat-icon (click)="passwordHide = !passwordHide" matSuffix class="bg-transparent">{{passwordHide ?
                 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="w-full ">
-            <mat-label>Confirm Password</mat-label>
+        <mat-form-field appearance="fill" class="w-full bg-white">
+            <mat-label class="bg-transparent">Confirm Password</mat-label>
             <input formControlName="confirmPassword" matInput type="{{confirmPasswordHide ? 'password' : 'text'}}" placeholder="Confirm Password">
-            <mat-icon matPrefix>lock</mat-icon>
-            <mat-icon (click)="confirmPasswordHide = !confirmPasswordHide" matSuffix>{{confirmPasswordHide ?
+            <mat-icon matPrefix class="bg-transparent">lock</mat-icon>
+            <mat-icon (click)="confirmPasswordHide = !confirmPasswordHide" matSuffix class="bg-transparent">{{confirmPasswordHide ?
                  'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
 
@@ -60,11 +60,11 @@
             Register
         </button>
 
-        <div class="my-4">
-            <span class="text-slate-600">
+        <div class="my-4 bg-white">
+            <span class="text-slate-600 bg-white">
                 Already have an account?
             </span>
-            <a href="" class="text-purple-700" [routerLink]="['/login']">login</a>
+            <a href="" class="text-purple-700 bg-white" [routerLink]="['/login']">login</a>
         </div>
     </form>
 </div>
